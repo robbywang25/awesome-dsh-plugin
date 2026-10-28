@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/command-copy.css">
 <title>__TITLE__</title>
 <meta name="description" content="__DESC__">
 <link rel="canonical" href="__URL__">
@@ -376,6 +377,7 @@ dsh plugin --profile web add github:owner/repo</pre>
   <span>__T_DISCLAIMER__</span>
 </div></footer>
 
+<script src="/command-copy.js"></script>
 <script>
 const urlParams = new URLSearchParams(location.search);
 
@@ -529,29 +531,17 @@ for (const c of document.querySelectorAll('button.chip')) c.classList.toggle('ac
 paintToggles();
 
 const live = document.getElementById('live');
-async function copyCmd(btn) {
-  try { await navigator.clipboard.writeText(btn.dataset.cmd); } catch {}
-  live.textContent = '__T_COPIED__';
-  setTimeout(() => { live.textContent = ''; }, 1500);
-}
+const copyCmd = createCommandCopier({copied:'__T_COPIED__', failed:'__T_COPY_FAILED__',
+  manual:'__T_COPY_MANUAL__', command:'__T_COPY_COMMAND__', close:'__T_COPY_CLOSE__'}, live);
 document.addEventListener('click', async (e) => {
   const mi = e.target.closest('.inst .menu > button');
   if (mi) {
-    await copyCmd(mi);
-    mi.classList.add('done');
-    const b = mi.querySelector('b');
-    const old = b.textContent;
-    b.textContent = '✓ __T_COPIED__';
-    setTimeout(() => { b.textContent = old; mi.classList.remove('done'); mi.closest('details').open = false; }, 900);
+    await copyCmd(mi, mi.querySelector('b'), mi.closest('details'));
     return;
   }
   const btn = e.target.closest('.cli .copy, .market .go, .indexline .copy');
   if (btn) {
     await copyCmd(btn);
-    btn.classList.add('done');
-    const old = btn.textContent;
-    btn.textContent = '✓ __T_COPIED__';
-    setTimeout(() => { btn.classList.remove('done'); btn.textContent = old; }, 1200);
     return;
   }
   // close any open install menu on outside click

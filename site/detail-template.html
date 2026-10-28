@@ -4,6 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/command-copy.css">
 <title>__TITLE__</title>
 <meta name="description" content="__DESC__">
 <link rel="canonical" href="__URL__">
@@ -252,15 +253,14 @@ __P_RELATED__
   <p>© 2026 awesome-dsh-plugin · <a href="https://github.com/awesome-dsh-plugin/awesome-dsh-plugin" rel="noopener">GitHub</a> · <a href="__PRIVACY__">__T_PRIVACY__</a> · __T_NOTAFF__</p>
 </footer>
 
+<script src="/command-copy.js"></script>
 <script>
+const copyCmd = createCommandCopier({copied:'__T_COPIED__', failed:'__T_COPY_FAILED__',
+  manual:'__T_COPY_MANUAL__', command:'__T_COPY_COMMAND__', close:'__T_COPY_CLOSE__'});
 document.addEventListener('click', async (e) => {
   const btn = e.target.closest('.cmd button');
   if (!btn) return;
-  try { await navigator.clipboard.writeText(btn.dataset.cmd); } catch {}
-  btn.classList.add('done');
-  const old = btn.textContent;
-  btn.textContent = '✓';
-  setTimeout(() => { btn.classList.remove('done'); btn.textContent = old; }, 1200);
+  await copyCmd(btn);
 });
 
 // Comments load on their own — arriving on the page is the request. They are

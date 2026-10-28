@@ -1,0 +1,7 @@
+.command-copy-fallback{position:fixed;inset:0;margin:auto;width:min(32rem,calc(100vw - 2rem));max-height:85vh;overflow:auto;padding:1.25rem;border:1px solid var(--line-2);border-radius:12px;background:var(--card);color:var(--ink);box-shadow:0 12px 50px #0003}
+.command-copy-fallback::backdrop{background:#0006}
+.command-copy-fallback h2{margin:0 0 .5rem;font-size:1.1rem}
+.command-copy-fallback p{margin:0 0 1rem;color:var(--ink-2);line-height:1.5}
+.command-copy-fallback textarea{box-sizing:border-box;display:block;width:100%;min-height:6rem;max-height:40vh;resize:vertical;padding:.7rem;border:1px solid var(--line-2);border-radius:6px;background:var(--paper);color:var(--ink);font-family:var(--mono);font-size:.85rem;line-height:1.5;overflow-wrap:anywhere}
+.command-copy-fallback button{display:block;min-height:44px;margin:1rem 0 0 auto;padding:.5rem 1rem;border:1px solid var(--line-2);border-radius:6px;background:var(--paper);color:var(--ink);font:inherit;cursor:pointer}
+.command-copy-fallback :focus-visible{outline:2px solid var(--cinnabar);outline-offset:2px}
